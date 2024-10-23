@@ -9,8 +9,9 @@ import SwiftUI
 
 struct AppTabView: View {
 
-    @AppStorage("selectedTab") private var selectedTab: Tabs = .game.id
+    @SceneStorage("selectedTab") private var selectedTab: Tabs = Tabs.game
 
+    
     var body: some View {
         if #available(iOS 18.0, *) {
             tabView
@@ -59,7 +60,7 @@ struct AppTabView: View {
     private var tabView: some View {
         TabView(selection: $selectedTab) {
             ForEach(Tabs.allCases) { tab in
-                Tab(value: tab) {
+                Tab(value: tab.id) {
                     NavigationStack { view(for: tab) }
                 } label: {
                     label(for: tab)

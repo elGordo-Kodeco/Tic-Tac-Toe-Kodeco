@@ -9,54 +9,42 @@ import SwiftUI
 
 struct GameView: View {
 
-    private let columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 16), count: 3)
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @StateObject private var viewModel = GameViewModel()
 
+    
     var body: some View {
-        NavigationStack {
-            LazyVGrid(columns: columns) {
-                ForEach(0 ..< 9) { item in
-                    Circle()
-                        .fill(.blue)
+        GeometryReader { proxy in
+            VStack {
+                Spacer()
+
+                LazyVGrid(columns: viewModel.columns, spacing: viewModel.itemSpacing) {
+                    ForEach(0 ..< 9, id: \.self) { index in
+                        GridItemView(
+                            viewModel: viewModel,
+                            proxy: proxy,
+                            moves: viewModel.moves,
+                            index: index
+                        )
+                    }
                 }
+                .padding(.horizontal, viewModel.horizontalPadding)
+                .offset(y: verticalSizeClass != .compact ? viewModel.navigationContentYOffset : .zero)
+
+                Spacer()
             }
-            .navigationTitle("Some title")
+            .disabled(viewModel.isGameboardDisabled)
+            .alert(item: $viewModel.alertItem) {
+                Alert(title: $0.title, message: $0.message, dismissButton: .default($0.buttonTitle, action: viewModel.resetGame))
+            }
         }
+        .navigationTitle("TicTacToe")
     }
 }
 
+
 #Preview {
-    GameView()
+    NavigationStack {
+        GameView()
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//            Grid {
-//                // These are our rows
-//                ForEach(0 ..< 3) { item in
-//                    GridRow {
-//                        // These are our columns
-//                        ForEach(0 ..< 3) { item in
-//                            Circle()
-//                                .fill(.red)
-//                        }
-//                    }
-//                }
-//            }

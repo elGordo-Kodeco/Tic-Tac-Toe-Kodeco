@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-// Provide a navigation title - done
-// Sample list with placeholder values - done
-
 struct StatsView: View {
     var body: some View {
         List(0 ..< 5) { item in
@@ -18,6 +15,7 @@ struct StatsView: View {
         .navigationTitle("Stats View")
     }
 }
+
 
 #Preview {
     NavigationStack {

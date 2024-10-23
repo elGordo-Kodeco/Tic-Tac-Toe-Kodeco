@@ -2,19 +2,20 @@
 //  Tabs.swift
 //  Tic-Tac-Toe-Kodeco
 //
-//  Created by RouraIndustries on 10/14/24.
+//  Created by Christopher J. Roura on 10/17/24.
 //
 
 import Foundation
 
-enum Tabs: Int, Identifiable, CaseIterable {
+// This is data for a tab
+enum Tabs: Int, Identifiable {
 
     case game, stats
 
-    var id: Self { self }
+    var id: Tabs { self }
     var customizationID: String { description }
 
-    var title: LocalizedStringResource {
+    var title: String {
         switch self {
         case .game:     "Play"
         case .stats:    "Stats"
@@ -35,3 +36,6 @@ enum Tabs: Int, Identifiable, CaseIterable {
         }
     }
 }
+
+
+extension Tabs: CaseIterable {}
