@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct StatsView: View {
+
     var body: some View {
         List(0 ..< 5) { item in
-            Text("Placeholder text")
+            Text("Placeholder text for \(item)")
         }
         .navigationTitle("Stats View")
     }
 }
-
 
 #Preview {
     NavigationStack {
