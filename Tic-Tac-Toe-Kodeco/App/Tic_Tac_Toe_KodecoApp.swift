@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct Tic_Tac_Toe_KodecoApp: App {
+    // swiftlint:disable:previous type_name
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
         }
     }
 }
